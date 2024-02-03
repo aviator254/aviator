@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviator Predictor</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom CSS for styling */
+       body {
+    background-color: blue; /* Set the background color to blue */
+    opacity: 1.0; /* Adjust opacity as needed */
+}
+
+
+        .dashboard-container {
+            background-color: rgba(255, 87, 51, 0.7); /* Red background color with opacity */
+        }
+        #crashCircle {
+            border-color: #f44336; /* Red border color */
+        }
+        #crashNumber {
+            color: #ff0000; /* Red text color */
+        }
+        #crashPlane {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        .plane-body {
+            background-color: #f44336; /* Red body color */
+            width: 80px;
+            height: 30px;
+            position: absolute;
+            top: 35px;
+            left: 10px;
+            transform: rotate(45deg);
+            border-radius: 5px;
+        }
+        .plane-wing {
+            background-color: #f44336; /* Red wing color */
+            width: 100px;
+            height: 10px;
+            position: absolute;
+            top: 45px;
+            left: -20px;
+            transform: rotate(-45deg);
+        }
+        /* Table styles */
+        .user-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: rgba(255, 87, 51, 0.5); /* Red table background color with opacity */
+        }
+        .user-table th, .user-table td {
+            border: 1px solid #fff;
+            padding: 10px;
+            text-align: center;
+            color: #000; /* Black text color */
+        }
+        .user-table th {
+            background-color: #ff0000; /* Red header background color */
+        }
+    </style>
+</head>
+<body class="bg-blue-200 p-4">
+    <div class="bg-white p-4 shadow-md rounded-lg dashboard-container">
+        <h1 class="text-2xl font-bold text-center text-black-500">Aviator Predictor</h1>
+        <div class="flex justify-between items-center mt-4">
+            <div class="flex items-center">
+                <span class="text-black-500">Account Active</span>
+                <div class="w-4 h-4 bg-green-500 rounded-full ml-2 animate-ping"></div>
+            </div>
+            <button id="nextGame" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Next Game</button>
+        </div>
+        <div class="mt-4">
+            <div id="crashCircle" class="w-20 h-20 border-4 border-black-500 rounded-full mx-auto animate-spin relative">
+                <div id="crashPlane" class="animate-plane">
+                    <div class="plane-body"></div>
+                    <div class="plane-wing"></div>
+                </div>
+            </div>
+            <div id="crashNumber" class="text-4xl mt-4 text-center">
+                <span class="text-black-500" id="crashValue">X</span>
+            </div>
+        </div>
+        <!-- User table -->
+        <table class="user-table mt-8">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Amount Won</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Random user data with amount above 2000 -->
+        <tr>
+            <td>Jane Smith</td>
+            <td>2500</td>
+            <td>Online</td>
+        </tr>
+        <tr>
+            <td>John Doe</td>
+            <td>3000</td>
+            <td>Offline</td>
+        </tr>
+        <tr>
+            <td>Mary Njeri</td>
+            <td>2800</td>
+            <td>Online</td>
+        </tr>
+        <!-- Add more random data rows as needed -->
+        <tr>
+            <td>David Kimani</td>
+            <td>2200</td>
+            <td>Online</td>
+        </tr>
+        <tr>
+            <td>Sarah Wangari</td>
+            <td>2100</td>
+            <td>Offline</td>
+        </tr>
+        <tr>
+            <td>Paul Kinyua</td>
+            <td>3200</td>
+            <td>Online</td>
+        </tr>
+        <tr>
+            <td>Grace Wanjiku</td>
+            <td>2800</td>
+            <td>Offline</td>
+        </tr>
+        <tr>
+            <td>Peter Kamau</td>
+            <td>2500</td>
+            <td>Online</td>
+        </tr>
+        <tr>
+            <td>Mercy Muthoni</td>
+            <td>2900</td>
+            <td>Offline</td>
+        </tr>
+        <tr>
+            <td>James Ngugi</td>
+            <td>2400</td>
+            <td>Online</td>
+        </tr>
+        <tr>
+            <td>Michael Kariuki</td>
+            <td>2600</td>
+            <td>Offline</td>
+        </tr>
+        <tr>
+            <td>Alice Nyambura</td>
+            <td>2200</td>
+            <td>Online</td>
+        </tr>
+        <tr>
+            <td>Joseph Gitonga</td>
+            <td>2100</td>
+            <td>Offline</td>
+        </tr>
+        <tr>
+            <td>Lucy Wambui</td>
+            <td>2700</td>
+            <td>Online</td>
+        </tr>
+        <tr>
+            <td>Simon Waweru</td>
+            <td>2300</td>
+            <td>Offline</td>
+        </tr>
+        <tr>
+            <td>Ruth Gathoni</td>
+            <td>2400</td>
+            <td>Online</td>
+        </tr>
+        <tr>
+            <td>Daniel Maina</td>
+            <td>2800</td>
+            <td>Offline</td>
+        </tr>
+        <tr>
+            <td>Anne Mwangi</td>
+            <td>2900</td>
+            <td>Online</td>
+        </tr>
+        <tr>
+            <td>Kevin Macharia</td>
+            <td>2200</td>
+            <td>Offline</td>
+        </tr>
+        <tr>
+            <td>Catherine Njeri</td>
+            <td>2100</td>
+            <td>Online</td>
+        </tr>
+        <!-- Add more random data rows as needed -->
+    </tbody>
+</table>
+
+    </div>
+
+    <!-- JavaScript to generate random crash numbers -->
+    <script>
+        const nextGameButton = document.getElementById('nextGame');
+        const crashCircle = document.getElementById('crashCircle');
+        const crashValue = document.getElementById('crashValue');
+
+        // Function to generate a random crash number
+        function generateRandomNumber() {
+            return (Math.random() * 10).toFixed(2) + 'X'; // Adds "X" to the generated number
+        }
+
+        // Event listener for the "Next Game" button
+        nextGameButton.addEventListener('click', () => {
+            const randomCrashNumber = generateRandomNumber();
+            crashValue.textContent = randomCrashNumber;
+        });
+    </script>
+</body>
+</html>
